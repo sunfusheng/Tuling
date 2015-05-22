@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,7 +39,6 @@ import com.robot.tuling.util.TimeUtil;
 import com.robot.tuling.widget.ActionSheet;
 import com.robot.tuling.widget.CircleImageView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -105,7 +102,6 @@ public class MainActivity extends ActionBarActivity implements View.OnTouchListe
         initData();
         initListener();
         registerMessageReceiver();
-
     }
 
     @Override
