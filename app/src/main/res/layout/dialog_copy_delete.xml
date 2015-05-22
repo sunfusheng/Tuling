@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/long_click_dialog_ll"
+	android:orientation="vertical"
+	android:layout_gravity="center"
+	android:layout_width="250dp"
+	android:background="@drawable/round_corner_rect_white_bg"
+	android:layout_height="wrap_content">
+
+	<TextView
+        android:id="@+id/title_action"
+    	android:layout_width="match_parent"
+    	android:textAppearance="?android:attr/textAppearanceMedium"
+    	android:textColor="@color/color_person_info"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="left|center_vertical"
+    	android:text="@string/please_choose"
+        android:textSize="@dimen/font_size_big"
+    	android:paddingTop="15dp"
+    	android:paddingBottom="15dp"
+    	android:paddingLeft="15dp"/>
+
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/color_person_info"/>
+
+    <TextView
+        android:id="@+id/copy"
+        android:layout_width="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:textColor="@color/font_black_2"
+        android:text="@string/copy_message"
+        android:textSize="@dimen/font_size_base"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/selector_textview_fillwidth"/>
+
+    <TextView
+        android:id="@+id/delete"
+    	android:layout_width="match_parent"
+    	android:textAppearance="?android:attr/textAppearanceMedium"
+    	android:layout_height="wrap_content"
+    	android:layout_gravity="left|center_vertical"
+    	android:textColor="@color/font_black_2"
+    	android:text="@string/delete_message"
+        android:textSize="@dimen/font_size_base"
+    	android:paddingTop="10dp"
+    	android:paddingBottom="10dp"
+    	android:paddingLeft="15dp"
+        android:background="@drawable/selector_textview_fillwidth"/>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:textColor="@color/font_black_2"
+        android:text="@string/cancel"
+        android:textSize="@dimen/font_size_base"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/selector_textview_fillwidth"/>
+</LinearLayout>

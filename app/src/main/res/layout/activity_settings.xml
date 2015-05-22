@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bk">
+
+    <include layout="@layout/app_base_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/base_padding_15"
+        android:paddingRight="@dimen/base_padding_10"
+        android:paddingTop="@dimen/base_padding_10"
+        android:paddingBottom="@dimen/base_padding_10"
+        style="@style/TextView_FullW">
+
+        <TextView
+            style="@style/font_normal_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_size_base"
+            android:text="消息推送" />
+
+        <com.zcw.togglebutton.ToggleButton
+            android:id="@+id/tb_msg_reception"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            toggle:onColor="@color/toggle_button_on"
+            toggle:offBorderColor="@color/divider_2" />
+    </RelativeLayout>
+
+</LinearLayout>

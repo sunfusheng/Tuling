@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">图灵机器人</string>
+    <string name="app_version">Android V1.1</string>
+    <string name="app_copyright">Copyright©2015 孙福生 版权所有</string>
+
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+
+    <string name="action_settings">设置</string>
+    <string name="action_notification">通知消息</string>
+
+    <string name="please_choose">请选择</string>
+    <string name="copy_message">复制</string>
+    <string name="delete_message">删除</string>
+
+    <string name="just_now">刚刚</string>
+    <string name="minuites_ago">分钟前</string>
+    <string name="hours_ago">小时前</string>
+    <string name="yestoday">昨天</string>
+    <string name="the_day_before_yestoday">前天</string>
+    <string name="days_ago">天前</string>
+
+</resources>

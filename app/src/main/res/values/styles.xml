@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="TextView_FullW">
+        <item name="android:textColor">@color/selector_normal_et_black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@drawable/selector_textview_fillwidth</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="font_normal_black">
+        <item name="android:textColor">@color/selector_normal_et_black</item>
+        <item name="android:textSize">@dimen/font_size_base</item>
+    </style>
+
+</resources>
