@@ -257,7 +257,6 @@ public class MainActivity extends ActionBarActivity implements View.OnTouchListe
         JPushInterface.setAlias(this, alias, new TagAliasCallback() {
             @Override
             public void gotResult(int i, String s, Set<String> strings) {
-
             }
         });
     }
