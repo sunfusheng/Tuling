@@ -3,23 +3,29 @@ package com.robot.tuling.ui;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ant.liao.GifView;
 import com.robot.tuling.R;
 import com.robot.tuling.ui.base.BaseActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by sunfusheng on 2015/1/13.
  */
 public class AboutActivity extends BaseActivity {
 
-    @InjectView(R.id.toolbar)
-    Toolbar mToolbar;
-    @InjectView(R.id.gv_about)
-    GifView mGvAbout;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.gv_about)
+    GifView gvAbout;
+    @Bind(R.id.lr_title)
+    TextView lrTitle;
+    @Bind(R.id.tv_version_right)
+    LinearLayout tvVersionRight;
 
     private boolean isShowGifView = true;
 
@@ -27,7 +33,7 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         initData();
     }
@@ -38,21 +44,21 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        mToolbar.setTitle(getString(R.string.about));
-        mToolbar.setSubtitle(getString(R.string.app_name));
-        setSupportActionBar(mToolbar);
+        toolbar.setTitle(getString(R.string.about));
+        toolbar.setSubtitle(getString(R.string.app_name));
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initGifView() {
-        mGvAbout.setGifImage(R.drawable.gif_robot_walk);
-        mGvAbout.setOnClickListener(new View.OnClickListener() {
+        gvAbout.setGifImage(R.drawable.gif_robot_walk);
+        gvAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isShowGifView) {
-                    mGvAbout.showCover();
+                    gvAbout.showCover();
                 } else {
-                    mGvAbout.showAnimation();
+                    gvAbout.showAnimation();
                 }
                 isShowGifView = !isShowGifView;
             }

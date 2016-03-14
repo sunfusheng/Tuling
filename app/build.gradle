@@ -23,17 +23,15 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':extras:toggleButton')
+
+    compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
 
     //SharedPreferences
     apt 'de.devland.esperandro:esperandro:2.1.0'
     compile 'de.devland.esperandro:esperandro-api:2.1.0'
 
-    //StickyListHeadersListView
-    compile 'se.emilsjolander:stickylistheaders:2.5.2'
-
-    compile 'com.android.support:appcompat-v7:21.0.+'
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
 }

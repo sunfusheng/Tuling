@@ -4,23 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.robot.tuling.ui.AboutActivity;
-import com.robot.tuling.ui.NotificationActivity;
-import com.robot.tuling.ui.SettingsActivity;
+import com.robot.tuling.ui.DetailActivity;
+import com.robot.tuling.ui.NewsActivity;
 
 public class NavigateManager {
 
-    public static void gotoNotificationActivity(Context context) {
-        Intent intent = new Intent(context, NotificationActivity.class);
-        context.startActivity(intent);
-    }
-
-    public static void gotoSettingsActivity(Context context) {
-        Intent intent = new Intent(context, SettingsActivity.class);
-        context.startActivity(intent);
-    }
-
     public static void gotoAboutActivity(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void gotoNewsActivity(Context context) {
+        Intent intent = new Intent(context, NewsActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void gotoDetailActivity(Context context, String url) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra("url", url);
         context.startActivity(intent);
     }
 

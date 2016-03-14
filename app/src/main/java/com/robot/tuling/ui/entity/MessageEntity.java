@@ -3,6 +3,7 @@ package com.robot.tuling.ui.entity;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MessageEntity extends SugarRecord<MessageEntity> implements Serializable {
 
