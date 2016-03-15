@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Tuling.iml" filepath="$PROJECT_DIR$/Tuling.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extras/extras.iml" filepath="$PROJECT_DIR$/extras/extras.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extras/toggleButton/toggleButton.iml" filepath="$PROJECT_DIR$/extras/toggleButton/toggleButton.iml" />
     </modules>
   </component>
 </project>

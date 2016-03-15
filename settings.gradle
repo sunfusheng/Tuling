@@ -1,1 +1,1 @@
-include ':app', ':extras:toggleButton'
+include ':app'
