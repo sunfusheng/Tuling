@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.base;
+package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

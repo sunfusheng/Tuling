@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.entity;
+package com.robot.tuling.entity;
 
 import com.orm.SugarRecord;
 

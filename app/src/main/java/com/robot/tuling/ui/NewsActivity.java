@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.robot.tuling.R;
-import com.robot.tuling.ui.adapter.NewsAdapter;
-import com.robot.tuling.ui.base.BaseActivity;
-import com.robot.tuling.ui.control.NavigateManager;
-import com.robot.tuling.ui.entity.NewsEntity;
+import com.robot.tuling.adapter.NewsAdapter;
+import com.robot.tuling.control.NavigateManager;
+import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.DisplayUtil;
 import com.robot.tuling.widget.refreshswipemenulistview.XListView;
 import com.robot.tuling.widget.swipemenulistview.SwipeMenu;

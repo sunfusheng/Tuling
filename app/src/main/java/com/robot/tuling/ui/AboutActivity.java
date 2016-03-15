@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.ant.liao.GifView;
 import com.robot.tuling.R;
-import com.robot.tuling.ui.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

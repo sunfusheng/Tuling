@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.control;
+package com.robot.tuling.control;
 
 import android.content.Context;
 import android.content.Intent;

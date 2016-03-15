@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.adapter;
+package com.robot.tuling.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.robot.tuling.R;
-import com.robot.tuling.ui.adapter.base.BaseListAdapter;
-import com.robot.tuling.ui.entity.NewsEntity;
+import com.robot.tuling.adapter.base.BaseListAdapter;
+import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.IsNullOrEmpty;
 
 import java.util.List;

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bk">
+    android:background="@color/bk"
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/lv_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0px"
-        android:divider="#00000000"
-        android:background="@color/bk"
         android:layout_above="@+id/input_relativelayout"
+        android:divider="#00000000"
+        android:dividerHeight="0px"
         android:transcriptMode="normal"/>
 
     <RelativeLayout
@@ -20,8 +20,8 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:background="@drawable/input_bk">
+        android:background="@drawable/input_bk"
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/send_message_btn"
@@ -31,46 +31,46 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="7dp"
             android:src="@drawable/selector_send"
-            android:visibility="visible" />
+            android:visibility="visible"/>
 
         <LinearLayout
             android:id="@+id/bottom_bar_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/send_message_btn"
-            android:padding="2dp"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/send_message_btn"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="2dp">
 
-                <FrameLayout
-                    android:id="@+id/input_bottom"
-                    android:layout_width="fill_parent"
+            <FrameLayout
+                android:id="@+id/input_bottom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/input_rect"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/message_content_edittext"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/input_rect"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-
-                    <EditText
-                        android:id="@+id/message_content_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:imeOptions="actionSend|flagNoEnterAction"
-                        android:inputType="textCapSentences|textAutoCorrect|textMultiLine|textShortMessage"
-                        android:maxLength="2000"
-                        android:maxLines="4"
-                        android:minHeight="32dp"
-                        android:layout_marginRight="50dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/font_black_2"/>
-                </FrameLayout>
+                    android:layout_marginRight="50dp"
+                    android:background="@null"
+                    android:imeOptions="actionSend|flagNoEnterAction"
+                    android:inputType="textCapSentences|textAutoCorrect|textMultiLine|textShortMessage"
+                    android:maxLength="2000"
+                    android:maxLines="4"
+                    android:minHeight="32dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/font_black_2"
+                    android:textSize="15sp"/>
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
 

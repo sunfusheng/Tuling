@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.robot.tuling.R;
-import com.robot.tuling.ui.base.BaseActivity;
 import com.robot.tuling.util.IsNullOrEmpty;
 
 import butterknife.Bind;

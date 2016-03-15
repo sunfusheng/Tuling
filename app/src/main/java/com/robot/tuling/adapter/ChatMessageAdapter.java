@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.adapter;
+package com.robot.tuling.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import com.robot.tuling.R;
 import com.robot.tuling.constant.TulingParameters;
-import com.robot.tuling.ui.adapter.base.BaseListAdapter;
-import com.robot.tuling.ui.adapter.base.ViewHolder;
-import com.robot.tuling.ui.control.NavigateManager;
-import com.robot.tuling.ui.entity.MessageEntity;
-import com.robot.tuling.ui.entity.NewsEntity;
+import com.robot.tuling.adapter.base.BaseListAdapter;
+import com.robot.tuling.adapter.base.ViewHolder;
+import com.robot.tuling.control.NavigateManager;
+import com.robot.tuling.entity.MessageEntity;
+import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.TimeUtil;
 
 import java.util.List;

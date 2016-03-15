@@ -1,4 +1,4 @@
-package com.robot.tuling.ui.control;
+package com.robot.tuling.control;
 
 /**
  * Created by sunfusheng on 2015/1/14.
