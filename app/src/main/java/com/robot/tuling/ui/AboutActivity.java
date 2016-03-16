@@ -2,7 +2,6 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,22 +44,20 @@ public class AboutActivity extends BaseActivity {
     private void initActionBar() {
         toolbar.setTitle(getString(R.string.about));
         toolbar.setSubtitle(getString(R.string.app_name));
+        toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initGifView() {
         gvAbout.setGifImage(R.drawable.gif_robot_walk);
-        gvAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isShowGifView) {
-                    gvAbout.showCover();
-                } else {
-                    gvAbout.showAnimation();
-                }
-                isShowGifView = !isShowGifView;
+        gvAbout.setOnClickListener((e)->{
+            if (isShowGifView) {
+                gvAbout.showCover();
+            } else {
+                gvAbout.showAnimation();
             }
+            isShowGifView = !isShowGifView;
         });
     }
 

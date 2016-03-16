@@ -11,7 +11,7 @@
         android:id="@+id/title_action"
     	android:layout_width="match_parent"
     	android:textAppearance="?android:attr/textAppearanceMedium"
-    	android:textColor="@color/color_person_info"
+    	android:textColor="@color/colorPrimary"
     	android:layout_height="wrap_content"
     	android:layout_gravity="left|center_vertical"
     	android:text="@string/please_choose"
@@ -23,7 +23,7 @@
      <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="@color/color_person_info"/>
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/copy"

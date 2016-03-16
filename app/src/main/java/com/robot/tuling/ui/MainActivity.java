@@ -2,14 +2,10 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -19,15 +15,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.robot.tuling.R;
-import com.robot.tuling.constant.TulingParameters;
 import com.robot.tuling.adapter.ChatMessageAdapter;
-import com.robot.tuling.control.HttpControl;
+import com.robot.tuling.constant.TulingParameters;
 import com.robot.tuling.control.NavigateManager;
 import com.robot.tuling.entity.MessageEntity;
 import com.robot.tuling.entity.NewsEntity;
@@ -44,7 +34,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends ActionBarActivity implements View.OnTouchListener, View.OnClickListener {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -127,33 +117,35 @@ public class MainActivity extends ActionBarActivity implements View.OnTouchListe
     private void initData() {
         initActionBar();
         initAdapter();
+
     }
 
     private void tulingHttpEvent(String input) {
-        HttpUtils httpUtils = new HttpUtils();
-        final String url = HttpControl.getTulingUrl(input);
-        httpUtils.send(HttpRequest.HttpMethod.GET, url,
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onStart() {
-                        Log.d(TulingParameters.TAG, url);
-                    }
+//        HttpUtils httpUtils = new HttpUtils();
+//        final String url = HttpControl.getTulingUrl(input);
+//        httpUtils.send(HttpRequest.HttpMethod.GET, url,
+//                new RequestCallBack<String>() {
+//                    @Override
+//                    public void onStart() {
+//                        Log.d(TulingParameters.TAG, url);
+//                    }
+//
+//                    @Override
+//                    public void onLoading(long total, long current, boolean isUploading) {
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(ResponseInfo<String> responseInfo) {
+//                        Log.d(TulingParameters.TAG, responseInfo.result);
+//                        MessageEntity entity = getMessageEntity(responseInfo.result);
+//                        handleNewMessageEntity(entity);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(HttpException error, String msg) {
+//                    }
+//                });
 
-                    @Override
-                    public void onLoading(long total, long current, boolean isUploading) {
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        Log.d(TulingParameters.TAG, responseInfo.result);
-                        MessageEntity entity = getMessageEntity(responseInfo.result);
-                        handleNewMessageEntity(entity);
-                    }
-
-                    @Override
-                    public void onFailure(HttpException error, String msg) {
-                    }
-                });
     }
 
     private MessageEntity getMessageEntity(String result) {
@@ -222,8 +214,8 @@ public class MainActivity extends ActionBarActivity implements View.OnTouchListe
     }
 
     private void initListener() {
-        drawerView.setOnTouchListener(this);
-        sendMessageBtn.setOnClickListener(this);
+        sendMessageBtn.setOnClickListener((v) -> sendMessage());
+
         lvMessage.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -234,20 +226,6 @@ public class MainActivity extends ActionBarActivity implements View.OnTouchListe
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.send_message_btn:
-                sendMessage();
-                break;
-        }
     }
 
     public void sendMessage() {

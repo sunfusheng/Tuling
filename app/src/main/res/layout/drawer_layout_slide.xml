@@ -12,7 +12,7 @@
         android:id="@+id/ll_user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_person_info"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:paddingTop="30dp"
         android:paddingBottom="20dp">
