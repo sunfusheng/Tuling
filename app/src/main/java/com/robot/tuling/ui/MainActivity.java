@@ -215,7 +215,6 @@ public class MainActivity extends BaseActivity {
 
     private void initListener() {
         sendMessageBtn.setOnClickListener((v) -> sendMessage());
-
         lvMessage.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

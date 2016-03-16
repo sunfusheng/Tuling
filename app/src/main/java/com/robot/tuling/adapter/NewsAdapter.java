@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lidroid.xutils.BitmapUtils;
 import com.robot.tuling.R;
 import com.robot.tuling.adapter.base.BaseListAdapter;
 import com.robot.tuling.entity.NewsEntity;
@@ -22,11 +21,8 @@ import butterknife.ButterKnife;
  */
 public class NewsAdapter extends BaseListAdapter<NewsEntity> {
 
-    private BitmapUtils bitmapUtils;
-
     public NewsAdapter(Context context, List<NewsEntity> list) {
         super(context, list);
-        bitmapUtils = new BitmapUtils(context);
     }
 
     @Override
@@ -42,7 +38,6 @@ public class NewsAdapter extends BaseListAdapter<NewsEntity> {
 
         final NewsEntity entity = getItem(position);
         if (!IsNullOrEmpty.isEmpty(entity.getIcon())) {
-            bitmapUtils.display(holder.ivNewsIcon, entity.getIcon());
         }
         holder.tvNewsTitle.setText(entity.getArticle() + "");
         holder.tvNewsContent.setText(entity.getSource() + "");
