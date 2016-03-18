@@ -9,32 +9,19 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.library.bubbleview.BubbleTextVew;
 import com.robot.tuling.R;
-import com.robot.tuling.constant.TulingParameters;
-import com.robot.tuling.adapter.base.BaseListAdapter;
-import com.robot.tuling.adapter.base.ViewHolder;
-import com.robot.tuling.control.NavigateManager;
 import com.robot.tuling.entity.MessageEntity;
-import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.TimeUtil;
 
 import java.util.List;
 
-/**
- * @Description: 对话适配器
- * @author: sunfusheng
- * @date: 2015-2-4 上午
- */
 public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
 
     private Context mContext;
-    private boolean showTime;
 
-    //文字类、链接类
-    private final int TYPE_RECEIVE_TXT = 0;
-    private final int TYPE_SEND_TXT = 1;
-    //新闻
-    private final int TYP_RECEIVE_NEWS = 2;
+    public static final int TYPE_LEFT = 0;
+    public static final int TYPE_RIGHT = 1;
 
     public ChatMessageAdapter(Context context, List<MessageEntity> list) {
         super(context, list);
@@ -42,101 +29,54 @@ public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
     }
 
     @Override
-    public int getItemViewType(int position) {
-        MessageEntity entity = getItem(position);
-        switch (entity.getCode()) {
-            case TulingParameters.TulingCode.TEXT:
-            case TulingParameters.TulingCode.URL:
-                return entity.getType() == TulingParameters.TYPE_RECEIVE? TYPE_RECEIVE_TXT : TYPE_SEND_TXT;
-            case TulingParameters.TulingCode.NEWS:
-                return TYP_RECEIVE_NEWS;
-            default:
-                return entity.getType() == TulingParameters.TYPE_RECEIVE? TYPE_RECEIVE_TXT : TYPE_SEND_TXT;
-        }
-    }
-
-    @Override
     public int getViewTypeCount() {
-        return 3;
-    }
-
-    private View createViewByCode(int position) {
-        MessageEntity entity = getItem(position);
-        switch (entity.getCode()) {
-            case TulingParameters.TulingCode.TEXT:
-            case TulingParameters.TulingCode.URL:
-                return getItemViewType(position) == TYPE_RECEIVE_TXT ?
-                        mInflater.inflate(R.layout.item_chat_received_message, null) : mInflater.inflate(R.layout.item_chat_sent_message, null);
-            case TulingParameters.TulingCode.NEWS:
-                return mInflater.inflate(R.layout.item_chat_received_message, null);
-            default:
-                return getItemViewType(position) == TYPE_RECEIVE_TXT ?
-                        mInflater.inflate(R.layout.item_chat_received_message, null) : mInflater.inflate(R.layout.item_chat_sent_message, null);
-        }
+        return 2;
     }
 
     @Override
-    public View bindView(int position, View convertView, ViewGroup parent) {
+    public int getItemViewType(int position) {
+        if (getItem(position).getType() == TYPE_LEFT) {
+            return TYPE_LEFT;
+        }
+        return TYPE_RIGHT;
+    }
+
+    private View createViewByType(int position) {
+        if (getItem(position).getType() == TYPE_LEFT) {
+            return mInflater.inflate(R.layout.item_conversation_left, null);
+        }
+        return mInflater.inflate(R.layout.item_conversation_right, null);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = createViewByCode(position);
+            convertView = createViewByType(position);
         }
 
         final MessageEntity entity = getItem(position);
-        showTime = getShowTime(position);
 
-        TextView mTvTime = ViewHolder.get(convertView, R.id.tv_time);
-        TextView mTvMessage = ViewHolder.get(convertView, R.id.tv_message);
+        TextView tvTime = ViewHolder.get(convertView, R.id.tv_time);
+        BubbleTextVew btvMessage = ViewHolder.get(convertView, R.id.btv_message);
 
-        if (showTime) {
-            mTvTime.setVisibility(View.VISIBLE);
-            mTvTime.setText(TimeUtil.friendlyTime(mContext, entity.getTime()));
+        if (isShowTime(position)) {
+            tvTime.setVisibility(View.VISIBLE);
+            tvTime.setText(TimeUtil.friendlyTime(mContext, entity.getTime()));
         } else {
-            mTvTime.setVisibility(View.GONE);
+            tvTime.setVisibility(View.GONE);
         }
 
-        switch (entity.getCode()) {
-            case TulingParameters.TulingCode.TEXT:
-                mTvMessage.setText(entity.getText());
-                break;
-            case TulingParameters.TulingCode.URL:
-                mTvMessage.setText("嗨，已帮您找到链接，点击打开。\n网址：" + entity.getUrl());
-                break;
-            case TulingParameters.TulingCode.NEWS:
-                List<NewsEntity> newsList = NewsEntity.listAll(NewsEntity.class);
-                mTvMessage.setText("亲，帮您搜索到" + newsList.size() + "条最新新闻，戳这里查看。");
-                break;
-            default:
-                mTvMessage.setText(entity.getText());
-                break;
-        }
-
-        mTvMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (entity.getCode()) {
-                    case TulingParameters.TulingCode.NEWS:
-                        NavigateManager.gotoNewsActivity(mContext);
-                        break;
-                    default:
-                        break;
-                }
-            }
+        btvMessage.setText(entity.getText());
+        btvMessage.setOnLongClickListener(v -> {
+            copyDeleteDialog(mContext, entity);
+            return false;
         });
 
-        mTvMessage.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                copyDeleteDialog(mContext, entity);
-                return false;
-            }
-        });
         return convertView;
     }
 
-    /*
-     * 十分钟内的请求与回复不显示时间
-     */
-    public boolean getShowTime(int position) {
+    // 十分钟内的请求与回复不显示时间
+    public boolean isShowTime(int position) {
         if (position > 0) {
             if ((getItem(position).getTime() - getItem(position - 1).getTime() > 60000)) {
                 return true;
@@ -172,8 +112,7 @@ public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                entity.delete();
-                getList().remove(entity);
+                getData().remove(entity);
                 notifyDataSetChanged();
             }
         });

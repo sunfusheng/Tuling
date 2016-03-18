@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.robot.tuling.R;
-import com.robot.tuling.adapter.base.BaseListAdapter;
 import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.IsNullOrEmpty;
 
@@ -26,7 +25,7 @@ public class NewsAdapter extends BaseListAdapter<NewsEntity> {
     }
 
     @Override
-    public View bindView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_news_layout, null);

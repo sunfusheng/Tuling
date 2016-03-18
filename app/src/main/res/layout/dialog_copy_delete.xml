@@ -4,7 +4,6 @@
 	android:orientation="vertical"
 	android:layout_gravity="center"
 	android:layout_width="250dp"
-	android:background="@drawable/round_corner_rect_white_bg"
 	android:layout_height="wrap_content">
 
 	<TextView
@@ -36,8 +35,7 @@
         android:textSize="@dimen/font_size_base"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
-        android:background="@drawable/selector_textview_fillwidth"/>
+        android:paddingLeft="15dp"/>
 
     <TextView
         android:id="@+id/delete"
@@ -50,8 +48,7 @@
         android:textSize="@dimen/font_size_base"
     	android:paddingTop="10dp"
     	android:paddingBottom="10dp"
-    	android:paddingLeft="15dp"
-        android:background="@drawable/selector_textview_fillwidth"/>
+    	android:paddingLeft="15dp"/>
 
     <TextView
         android:id="@+id/cancel"
@@ -65,6 +62,5 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/selector_textview_fillwidth"/>
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>

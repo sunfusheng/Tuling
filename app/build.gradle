@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.jakewharton:butterknife:8.0.0-SNAPSHOT'
     apt 'com.jakewharton:butterknife-compiler:8.0.0-SNAPSHOT'
@@ -35,6 +36,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
+
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.lguipeng.bubbleview:library:1.0.0'
+
+//    compile('com.github.afollestad.material-dialogs:commons:0.8.5.7@aar') {
+//        transitive = true
+//    }
 
     apt 'de.devland.esperandro:esperandro:2.1.0'
     compile 'de.devland.esperandro:esperandro-api:2.1.0'
@@ -46,6 +54,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
     compile 'com.google.code.gson:gson:2.6.2'
-
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bk"
@@ -16,7 +17,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:background="@null"
         android:text="1分钟前"
         android:textColor="@color/font_black_3"
         android:textSize="11sp"/>
@@ -26,31 +26,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
 
-        <com.robot.tuling.widget.CircleImageView
-            android:id="@+id/iv_avatar"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="4dp"
-            android:src="@drawable/app_avatar"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_msg_from"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/bk"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="60dp"
-            android:layout_toRightOf="@+id/iv_avatar"
-            android:background="@drawable/selector_chat_from">
+            android:layout_toRightOf="@+id/civ_avatar">
 
-            <TextView
-                android:id="@+id/tv_message"
+            <com.github.library.bubbleview.BubbleTextVew
+                android:id="@+id/btv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="phone|web|email"
                 android:padding="10dp"
-                android:text="你好！我是接收者。"
-                android:textColor="@color/font_black_2"
-                android:textSize="14sp"/>
+                android:text="你好！"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:angle="5dp"
+                app:arrowHeight="10dp"
+                app:arrowLocation="left"
+                app:arrowPosition="14dp"
+                app:arrowWidth="8dp"
+                app:bubbleColor="@color/selector_conversation_left"/>
 
         </LinearLayout>
 

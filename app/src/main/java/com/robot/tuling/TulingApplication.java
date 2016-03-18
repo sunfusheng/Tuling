@@ -1,11 +1,11 @@
 package com.robot.tuling;
 
-import com.orm.SugarApp;
+import android.app.Application;
 
 /**
  * Created by sunfusheng on 2014/12/10.
  */
-public class TulingApplication extends SugarApp {
+public class TulingApplication extends Application {
 
     @Override
     public void onCreate() {

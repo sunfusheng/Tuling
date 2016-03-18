@@ -1,10 +1,8 @@
 package com.robot.tuling.entity;
 
-import com.orm.SugarRecord;
-
 import java.io.Serializable;
 
-public class MessageEntity extends SugarRecord<MessageEntity> implements Serializable {
+public class MessageEntity implements Serializable {
 
     private int type;
     private long time;

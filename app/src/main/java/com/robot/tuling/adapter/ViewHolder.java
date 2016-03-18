@@ -1,4 +1,4 @@
-package com.robot.tuling.adapter.base;
+package com.robot.tuling.adapter;
 
 import android.util.SparseArray;
 import android.view.View;

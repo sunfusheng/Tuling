@@ -62,13 +62,19 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        msgList = MessageEntity.listAll(MessageEntity.class);
         if (msgList.size() == 0) {
             MessageEntity entity = new MessageEntity();
             entity.setType(TulingParameters.TYPE_RECEIVE);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
-            entity.setText("您好，我是图灵机器人！");
-            entity.save();
+            entity.setText("你好！俺是图灵机器人！\n咱俩聊点什么呢？\n你有什么要问的么？");
+            msgList.add(entity);
+
+            entity = new MessageEntity();
+            entity.setType(TulingParameters.TYPE_SEND);
+            entity.setTime(TimeUtil.getCurrentTimeMillis());
+            entity.setText("您好！我是福生！");
+            msgList.add(entity);
+            msgList.add(entity);
             msgList.add(entity);
         }
         msgAdapter = new ChatMessageAdapter(this, msgList);
@@ -154,8 +160,6 @@ public class MainActivity extends BaseActivity {
                     if (newsList == null) {
                         break;
                     }
-                    NewsEntity.deleteAll(NewsEntity.class);
-                    NewsEntity.saveInTx(newsList);
                     break;
             }
             return entity;
@@ -169,7 +173,6 @@ public class MainActivity extends BaseActivity {
         if (entity == null) {
             return;
         }
-        entity.save();
         msgList.add(entity);
         msgAdapter.notifyDataSetChanged();
     }

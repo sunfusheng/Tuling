@@ -1,13 +1,11 @@
 package com.robot.tuling.entity;
 
-import com.orm.SugarRecord;
-
 import java.io.Serializable;
 
 /**
  * Created by sunfusheng on 2015/2/4.
  */
-public class NewsEntity extends SugarRecord<NewsEntity> implements Serializable {
+public class NewsEntity implements Serializable {
 
     private String article;
     private String source;

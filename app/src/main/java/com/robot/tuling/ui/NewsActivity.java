@@ -54,7 +54,7 @@ public class NewsActivity extends BaseActivity implements XListView.IXListViewLi
     }
 
     private void initData() {
-        newsList = NewsEntity.listAll(NewsEntity.class);
+//        newsList = NewsEntity.listAll(NewsEntity.class);
     }
 
     private void initView() {
@@ -109,7 +109,6 @@ public class NewsActivity extends BaseActivity implements XListView.IXListViewLi
 
     private void deleteNewsListItem(int position) {
         NewsEntity entity = newsList.get(position);
-        entity.delete();
         newsList.remove(entity);
         newsAdapter.notifyDataSetChanged();
     }
