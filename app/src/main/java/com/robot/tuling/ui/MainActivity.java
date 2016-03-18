@@ -1,12 +1,9 @@
 package com.robot.tuling.ui;
 
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -24,7 +21,6 @@ import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.IsNullOrEmpty;
 import com.robot.tuling.util.KeyBoardUtil;
 import com.robot.tuling.util.TimeUtil;
-import com.robot.tuling.widget.CircleImageView;
 
 import org.json.JSONObject;
 
@@ -50,22 +46,9 @@ public class MainActivity extends BaseActivity {
     LinearLayout bottomBarLinearlayout;
     @Bind(R.id.input_relativelayout)
     RelativeLayout inputRelativelayout;
-    @Bind(R.id.iv_user_avatar)
-    CircleImageView ivUserAvatar;
-    @Bind(R.id.ll_user_info)
-    LinearLayout llUserInfo;
-    @Bind(R.id.tv_version_right)
-    LinearLayout tvVersionRight;
-    @Bind(R.id.drawer_view)
-    RelativeLayout drawerView;
-    @Bind(R.id.drawer)
-    DrawerLayout drawer;
 
-    private ActionBarDrawerToggle mDrawerToggle;
     private List<MessageEntity> msgList = new ArrayList<>();
     private ChatMessageAdapter msgAdapter;
-
-    public static boolean isForeground = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,51 +57,54 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         initData();
+        initView();
         initListener();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        isForeground = true;
-        if (msgAdapter != null) {
-            msgAdapter.notifyDataSetChanged();
+    private void initData() {
+        msgList = MessageEntity.listAll(MessageEntity.class);
+        if (msgList.size() == 0) {
+            MessageEntity entity = new MessageEntity();
+            entity.setType(TulingParameters.TYPE_RECEIVE);
+            entity.setTime(TimeUtil.getCurrentTimeMillis());
+            entity.setText("您好，我是图灵机器人！");
+            entity.save();
+            msgList.add(entity);
         }
+        msgAdapter = new ChatMessageAdapter(this, msgList);
+        lvMessage.setAdapter(msgAdapter);
+        lvMessage.setSelection(msgAdapter.getCount());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        isForeground = false;
+    private void initView() {
+        toolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(toolbar);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
+    private void initListener() {
+        sendMessageBtn.setOnClickListener((v) -> sendMessage());
+        lvMessage.setOnTouchListener((v, event) -> KeyBoardUtil.hideKeyboard(mActivity));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                NavigateManager.gotoAboutActivity(MainActivity.this);
+            case R.id.action_about:
+                NavigateManager.gotoAboutActivity(mContext);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            default: return false;
         }
     }
 
-    private void initData() {
-        initActionBar();
-        initAdapter();
 
-    }
 
     private void tulingHttpEvent(String input) {
 //        HttpUtils httpUtils = new HttpUtils();
@@ -186,45 +172,6 @@ public class MainActivity extends BaseActivity {
         entity.save();
         msgList.add(entity);
         msgAdapter.notifyDataSetChanged();
-    }
-
-    private void initActionBar() {
-        toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, 0, 0);
-        mDrawerToggle.syncState();
-        drawer.setDrawerListener(mDrawerToggle);
-    }
-
-    private void initAdapter() {
-        msgList = MessageEntity.listAll(MessageEntity.class);
-        if (msgList.size() == 0) {
-            MessageEntity entity = new MessageEntity();
-            entity.setType(TulingParameters.TYPE_RECEIVE);
-            entity.setTime(TimeUtil.getCurrentTimeMillis());
-            entity.setText("您好，我是图灵机器人！");
-            entity.save();
-            msgList.add(entity);
-        }
-        msgAdapter = new ChatMessageAdapter(this, msgList);
-        lvMessage.setAdapter(msgAdapter);
-        lvMessage.setSelection(msgAdapter.getCount());
-    }
-
-    private void initListener() {
-        sendMessageBtn.setOnClickListener((v) -> sendMessage());
-        lvMessage.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                KeyBoardUtil.hideKeyboard(MainActivity.this);
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        });
     }
 
     public void sendMessage() {

@@ -1,5 +1,7 @@
 package com.robot.tuling.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,9 +11,14 @@ import de.devland.esperandro.Esperandro;
 
 public class BaseActivity extends AppCompatActivity {
 
+    protected Context mContext;
+    protected Activity mActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
+        mActivity = this;
     }
 
     public <P> P getSharedPreferences(Class<P> spClass) {

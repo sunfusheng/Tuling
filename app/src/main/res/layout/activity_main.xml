@@ -1,20 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/app_base_toolbar" />
+    <include layout="@layout/app_base_toolbar"/>
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <include layout="@layout/drawer_layout_content"/>
 
-        <!-- 内容界面 -->
-        <include layout="@layout/drawer_layout_content" />
-
-        <!-- 侧滑菜单内容 -->
-        <include layout="@layout/drawer_layout_slide" />
-
-    </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

@@ -5,8 +5,6 @@ package com.robot.tuling.constant;
  */
 public class TulingParameters {
 
-    public static final String TAG = "Tuling: ";
-
     public static final int TYPE_RECEIVE = 0;
     public static final int TYPE_SEND = 1;
 
