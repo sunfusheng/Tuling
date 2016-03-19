@@ -14,37 +14,4 @@
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="CircleImageView">
-        <attr name="border_width" format="dimension" />
-        <attr name="border_color" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="ExpandableTextView">
-        <attr name="maxCollapsedLines" format="integer"/>
-        <attr name="animDuration" format="integer"/>
-        <attr name="contentRes" format="integer"/>
-        <attr name="collapseRes" format="integer"/>
-        <attr name="animAlphaStart" format="float"/>
-        <attr name="expandDrawable" format="reference"/>
-        <attr name="collapseDrawable" format="reference"/>
-    </declare-styleable>
-
-    <declare-styleable name="DashedLineView">
-        <attr name="dashedColor" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="EditViewHelper">
-        <attr name="point" format="string" />
-        <attr name="isNum" format="boolean" />
-        <attr name="maxLength" format="integer" />
-        <attr name="intLength" format="integer" />
-        <attr name="pointAlignRight" format="boolean"/>
-        <attr name="inputType">
-            <enum name="number" value="2" />
-            <enum name="text" value="1" />
-            <enum name="signed" value="3" />
-            <enum name="decimal" value="8192" />
-        </attr>
-    </declare-styleable>
-
 </resources>

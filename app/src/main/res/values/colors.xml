@@ -31,9 +31,6 @@
     <color name="font_green">#43aea8</color>
     <color name="font_blue">#4882ea</color>
     <color name="font_blue_deep">#248FAF</color>
-    <color name="require">#d71345</color>
-    <color name="remark_color">#FBF0AD</color>
-    <color name="remark_text_color">#897A2A</color>
 
     <!-- divider -->
     <color name="divider_1">#e2e2e2</color>

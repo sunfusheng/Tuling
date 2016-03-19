@@ -2,16 +2,14 @@
 <resources>
 
     <string name="app_name">图灵机器人</string>
-    <string name="app_version">Android V1.1</string>
-    <string name="app_copyright">Copyright©2015 孙福生 版权所有</string>
+    <string name="app_version">版本 1.2</string>
+    <string name="app_copyright">Copyright©2016 孙福生 版权所有</string>
 
     <string name="ok">确认</string>
     <string name="cancel">取消</string>
     <string name="about">关于</string>
     <string name="exit">退出</string>
-
     <string name="action_settings">设置</string>
-    <string name="action_notification">通知消息</string>
 
     <string name="please_choose">请选择</string>
     <string name="copy_message">复制</string>

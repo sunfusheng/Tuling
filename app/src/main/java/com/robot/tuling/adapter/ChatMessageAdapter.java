@@ -99,29 +99,18 @@ public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
         TextView deleteView = (TextView) window.findViewById(R.id.delete);
         TextView cancelView = (TextView) window.findViewById(R.id.cancel);
 
-        copyView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                copy.setText(entity.getText());
-                Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show();
-            }
+        copyView.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            copy.setText(entity.getText());
+            Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show();
         });
-        deleteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                getData().remove(entity);
-                notifyDataSetChanged();
-            }
+        deleteView.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            getData().remove(entity);
+            notifyDataSetChanged();
         });
-        cancelView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-            }
-        });
+        cancelView.setOnClickListener(v -> alertDialog.dismiss());
     }
 
 }

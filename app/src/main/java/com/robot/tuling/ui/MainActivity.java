@@ -5,9 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -36,16 +34,12 @@ public class MainActivity extends BaseActivity {
     Toolbar toolbar;
     @Bind(R.id.lv_message)
     ListView lvMessage;
-    @Bind(R.id.send_message_btn)
-    ImageView sendMessageBtn;
-    @Bind(R.id.message_content_edittext)
-    EditText messageContentEdittext;
-    @Bind(R.id.input_bottom)
-    FrameLayout inputBottom;
-    @Bind(R.id.bottom_bar_linearlayout)
-    LinearLayout bottomBarLinearlayout;
-    @Bind(R.id.input_relativelayout)
-    RelativeLayout inputRelativelayout;
+    @Bind(R.id.iv_send_msg)
+    ImageView ivSendMsg;
+    @Bind(R.id.et_msg)
+    EditText etMsg;
+    @Bind(R.id.rl_msg)
+    RelativeLayout rlMsg;
 
     private List<MessageEntity> msgList = new ArrayList<>();
     private ChatMessageAdapter msgAdapter;
@@ -88,7 +82,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initListener() {
-        sendMessageBtn.setOnClickListener((v) -> sendMessage());
+        ivSendMsg.setOnClickListener((v) -> sendMessage());
         lvMessage.setOnTouchListener((v, event) -> KeyBoardUtil.hideKeyboard(mActivity));
     }
 
@@ -106,10 +100,10 @@ public class MainActivity extends BaseActivity {
             case R.id.action_about:
                 NavigateManager.gotoAboutActivity(mContext);
                 return true;
-            default: return false;
+            default:
+                return false;
         }
     }
-
 
 
     private void tulingHttpEvent(String input) {
@@ -178,7 +172,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void sendMessage() {
-        String msg = messageContentEdittext.getText().toString().trim();
+        String msg = etMsg.getText().toString().trim();
 
         if (!IsNullOrEmpty.isEmpty(msg)) {
             MessageEntity entity = new MessageEntity();
@@ -186,7 +180,7 @@ public class MainActivity extends BaseActivity {
             entity.setType(TulingParameters.TYPE_SEND);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             handleNewMessageEntity(entity);
-            messageContentEdittext.setText("");
+            etMsg.setText("");
             tulingHttpEvent(msg);
         }
     }

@@ -2,10 +2,76 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bk"
     android:orientation="vertical">
 
     <include layout="@layout/app_base_toolbar"/>
 
-    <include layout="@layout/drawer_layout_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <ListView
+            android:id="@+id/lv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/divider"
+            android:divider="#00000000"
+            android:dividerHeight="0px"
+            android:transcriptMode="normal"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/rl_msg"
+            android:background="@color/font_black_5"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_msg"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_send_msg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/selector_send"/>
+
+            <LinearLayout
+                android:id="@+id/ll_msg"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_send_msg"
+                android:background="@drawable/actionsheet_single_normal"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/white"
+                    android:hint="输入您的问题"
+                    android:imeOptions="actionSend|flagNoEnterAction"
+                    android:inputType="textCapSentences|textAutoCorrect|textMultiLine|textShortMessage"
+                    android:maxLength="100"
+                    android:maxLines="4"
+                    android:minHeight="32dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/font_black_2"
+                    android:textColorHint="@color/font_black_5"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

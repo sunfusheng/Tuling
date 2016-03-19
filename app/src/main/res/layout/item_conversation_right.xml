@@ -34,7 +34,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/miaomiao"
+            android:src="@drawable/icon_cat"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/bk"/>
 
