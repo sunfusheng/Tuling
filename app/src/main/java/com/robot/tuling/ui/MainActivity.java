@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import com.alibaba.fastjson.JSON;
 import com.robot.tuling.R;
 import com.robot.tuling.adapter.ChatMessageAdapter;
-import com.robot.tuling.constant.TulingParameters;
+import com.robot.tuling.constant.TulingParams;
 import com.robot.tuling.control.NavigateManager;
 import com.robot.tuling.entity.MessageEntity;
 import com.robot.tuling.entity.NewsEntity;
@@ -58,13 +58,13 @@ public class MainActivity extends BaseActivity {
     private void initData() {
         if (msgList.size() == 0) {
             MessageEntity entity = new MessageEntity();
-            entity.setType(TulingParameters.TYPE_RECEIVE);
+            entity.setType(TulingParams.TYPE_RECEIVE);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             entity.setText("你好！俺是图灵机器人！\n咱俩聊点什么呢？\n你有什么要问的么？");
             msgList.add(entity);
 
             entity = new MessageEntity();
-            entity.setType(TulingParameters.TYPE_SEND);
+            entity.setType(TulingParams.TYPE_SEND);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             entity.setText("您好！我是福生！");
             msgList.add(entity);
@@ -100,8 +100,7 @@ public class MainActivity extends BaseActivity {
             case R.id.action_about:
                 NavigateManager.gotoAboutActivity(mContext);
                 return true;
-            default:
-                return false;
+            default: return false;
         }
     }
 
@@ -140,16 +139,16 @@ public class MainActivity extends BaseActivity {
             jsonObj = new JSONObject(result);
             MessageEntity entity = new MessageEntity();
 
-            entity.setType(TulingParameters.TYPE_RECEIVE);
+            entity.setType(TulingParams.TYPE_RECEIVE);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             entity.setCode(jsonObj.optInt("code"));
             entity.setText(jsonObj.optString("text"));
 
             switch (jsonObj.optInt("code")) {
-                case TulingParameters.TulingCode.URL:
+                case TulingParams.TulingCode.URL:
                     entity.setUrl(jsonObj.optString("url"));
                     break;
-                case TulingParameters.TulingCode.NEWS:
+                case TulingParams.TulingCode.NEWS:
                     List<NewsEntity> newsList = JSON.parseArray(jsonObj.optJSONArray("list").toString(), NewsEntity.class);
                     if (newsList == null) {
                         break;
@@ -177,7 +176,7 @@ public class MainActivity extends BaseActivity {
         if (!IsNullOrEmpty.isEmpty(msg)) {
             MessageEntity entity = new MessageEntity();
             entity.setText(msg);
-            entity.setType(TulingParameters.TYPE_SEND);
+            entity.setType(TulingParams.TYPE_SEND);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             handleNewMessageEntity(entity);
             etMsg.setText("");

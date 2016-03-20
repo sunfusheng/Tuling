@@ -3,10 +3,13 @@ package com.robot.tuling.constant;
 /**
  * Created by sunfusheng on 2014/12/19.
  */
-public class TulingParameters {
+public class TulingParams {
 
     public static final int TYPE_RECEIVE = 0;
     public static final int TYPE_SEND = 1;
+
+    public static final String TULING_URL = "http://www.tuling123.com/openapi/api";
+    public static  final String TULING_KEY = "577173e62a2ff6627b62e94d663b449c";
 
     public static class TulingCode {
         public static final int TEXT = 100000;//文本类数据
