@@ -7,7 +7,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId 'com.robot.tuling'
+        applicationId 'com.sunfusheng.tuling'
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 2
@@ -40,9 +40,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.lguipeng.bubbleview:library:1.0.0'
 
-//    compile('com.github.afollestad.material-dialogs:commons:0.8.5.7@aar') {
-//        transitive = true
-//    }
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
+        transitive = true
+    }
 
     apt 'de.devland.esperandro:esperandro:2.1.0'
     compile 'de.devland.esperandro:esperandro-api:2.1.0'

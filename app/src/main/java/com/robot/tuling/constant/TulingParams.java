@@ -5,10 +5,7 @@ package com.robot.tuling.constant;
  */
 public class TulingParams {
 
-    public static final int TYPE_RECEIVE = 0;
-    public static final int TYPE_SEND = 1;
-
-    public static final String TULING_URL = "http://www.tuling123.com/openapi/api";
+    public static final String TULING_URL = "http://www.tuling123.com/openapi/";
     public static  final String TULING_KEY = "577173e62a2ff6627b62e94d663b449c";
 
     public static class TulingCode {

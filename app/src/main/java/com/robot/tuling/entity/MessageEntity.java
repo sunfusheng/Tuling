@@ -50,4 +50,14 @@ public class MessageEntity implements Serializable {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "MessageEntity{" +
+                "type=" + type +
+                ", time=" + time +
+                ", code=" + code +
+                ", text='" + text + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

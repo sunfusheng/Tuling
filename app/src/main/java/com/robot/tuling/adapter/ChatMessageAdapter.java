@@ -1,14 +1,13 @@
 package com.robot.tuling.adapter;
 
-import android.app.AlertDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
-import android.text.ClipboardManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.library.bubbleview.BubbleTextVew;
 import com.robot.tuling.R;
 import com.robot.tuling.entity.MessageEntity;
@@ -88,29 +87,23 @@ public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void copyDeleteDialog(final Context context, final MessageEntity entity) {
-        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.show();
-
-        Window window = alertDialog.getWindow();
-        window.setContentView(R.layout.dialog_copy_delete);
-        TextView copyView = (TextView) window.findViewById(R.id.copy);
-        TextView deleteView = (TextView) window.findViewById(R.id.delete);
-        TextView cancelView = (TextView) window.findViewById(R.id.cancel);
-
-        copyView.setOnClickListener(v -> {
-            alertDialog.dismiss();
-            ClipboardManager copy = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            copy.setText(entity.getText());
-            Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show();
-        });
-        deleteView.setOnClickListener(v -> {
-            alertDialog.dismiss();
-            getData().remove(entity);
-            notifyDataSetChanged();
-        });
-        cancelView.setOnClickListener(v -> alertDialog.dismiss());
+    private void copyDeleteDialog(Context context, MessageEntity entity) {
+        new MaterialDialog.Builder(context)
+                .items("复制文本", "删除")
+                .itemsCallback((dialog, view, which, text) -> {
+                    switch (which) {
+                        case 0:
+                            ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                            cm.setText(entity.getText());
+                            Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            getData().remove(entity);
+                            notifyDataSetChanged();
+                            break;
+                    }
+                })
+                .show();
     }
 
 }

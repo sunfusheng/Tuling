@@ -2,6 +2,7 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -9,24 +10,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.alibaba.fastjson.JSON;
 import com.robot.tuling.R;
 import com.robot.tuling.adapter.ChatMessageAdapter;
 import com.robot.tuling.constant.TulingParams;
 import com.robot.tuling.control.NavigateManager;
+import com.robot.tuling.control.RetrofitApi;
 import com.robot.tuling.entity.MessageEntity;
-import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.IsNullOrEmpty;
 import com.robot.tuling.util.KeyBoardUtil;
 import com.robot.tuling.util.TimeUtil;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends BaseActivity {
 
@@ -58,17 +61,9 @@ public class MainActivity extends BaseActivity {
     private void initData() {
         if (msgList.size() == 0) {
             MessageEntity entity = new MessageEntity();
-            entity.setType(TulingParams.TYPE_RECEIVE);
+            entity.setType(ChatMessageAdapter.TYPE_LEFT);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
             entity.setText("你好！俺是图灵机器人！\n咱俩聊点什么呢？\n你有什么要问的么？");
-            msgList.add(entity);
-
-            entity = new MessageEntity();
-            entity.setType(TulingParams.TYPE_SEND);
-            entity.setTime(TimeUtil.getCurrentTimeMillis());
-            entity.setText("您好！我是福生！");
-            msgList.add(entity);
-            msgList.add(entity);
             msgList.add(entity);
         }
         msgAdapter = new ChatMessageAdapter(this, msgList);
@@ -100,74 +95,9 @@ public class MainActivity extends BaseActivity {
             case R.id.action_about:
                 NavigateManager.gotoAboutActivity(mContext);
                 return true;
-            default: return false;
+            default:
+                return false;
         }
-    }
-
-
-    private void tulingHttpEvent(String input) {
-//        HttpUtils httpUtils = new HttpUtils();
-//        final String url = HttpControl.getTulingUrl(input);
-//        httpUtils.send(HttpRequest.HttpMethod.GET, url,
-//                new RequestCallBack<String>() {
-//                    @Override
-//                    public void onStart() {
-//                        Log.d(TulingParameters.TAG, url);
-//                    }
-//
-//                    @Override
-//                    public void onLoading(long total, long current, boolean isUploading) {
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(ResponseInfo<String> responseInfo) {
-//                        Log.d(TulingParameters.TAG, responseInfo.result);
-//                        MessageEntity entity = getMessageEntity(responseInfo.result);
-//                        handleNewMessageEntity(entity);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(HttpException error, String msg) {
-//                    }
-//                });
-
-    }
-
-    private MessageEntity getMessageEntity(String result) {
-        JSONObject jsonObj = null;
-        try {
-            jsonObj = new JSONObject(result);
-            MessageEntity entity = new MessageEntity();
-
-            entity.setType(TulingParams.TYPE_RECEIVE);
-            entity.setTime(TimeUtil.getCurrentTimeMillis());
-            entity.setCode(jsonObj.optInt("code"));
-            entity.setText(jsonObj.optString("text"));
-
-            switch (jsonObj.optInt("code")) {
-                case TulingParams.TulingCode.URL:
-                    entity.setUrl(jsonObj.optString("url"));
-                    break;
-                case TulingParams.TulingCode.NEWS:
-                    List<NewsEntity> newsList = JSON.parseArray(jsonObj.optJSONArray("list").toString(), NewsEntity.class);
-                    if (newsList == null) {
-                        break;
-                    }
-                    break;
-            }
-            return entity;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void handleNewMessageEntity(MessageEntity entity) {
-        if (entity == null) {
-            return;
-        }
-        msgList.add(entity);
-        msgAdapter.notifyDataSetChanged();
     }
 
     public void sendMessage() {
@@ -176,12 +106,38 @@ public class MainActivity extends BaseActivity {
         if (!IsNullOrEmpty.isEmpty(msg)) {
             MessageEntity entity = new MessageEntity();
             entity.setText(msg);
-            entity.setType(TulingParams.TYPE_SEND);
+            entity.setType(ChatMessageAdapter.TYPE_RIGHT);
             entity.setTime(TimeUtil.getCurrentTimeMillis());
-            handleNewMessageEntity(entity);
+
+            msgList.add(entity);
+            msgAdapter.notifyDataSetChanged();
             etMsg.setText("");
-            tulingHttpEvent(msg);
+            askTulingInfo(msg);
         }
+    }
+
+    private void askTulingInfo(String info) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(TulingParams.TULING_URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+
+        RetrofitApi api = retrofit.create(RetrofitApi.class);
+        Call<MessageEntity> tulingInfo = api.getTulingInfo(TulingParams.TULING_KEY, info);
+        tulingInfo.enqueue(new Callback<MessageEntity>() {
+            @Override
+            public void onResponse(Call<MessageEntity> call, Response<MessageEntity> response) {
+                if (response == null) return ;
+                if (response.body() != null) {
+                    msgList.add(response.body());
+                    msgAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageEntity> call, Throwable t) {
+            }
+        });
+
     }
 
 }

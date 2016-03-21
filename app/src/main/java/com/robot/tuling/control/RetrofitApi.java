@@ -1,15 +1,18 @@
 package com.robot.tuling.control;
 
-/**
- * Created by sunfusheng on 2015/1/14.
- */
-public class RetrofitApi {
+import com.robot.tuling.entity.MessageEntity;
 
-    /*
-     * 获得图灵API接口URL
-     */
-    public static String getTulingUrl(String input) {
-        return "";//TULING_URL + "?key=" + TULING_KEY + "&info=" + input;
-    }
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
+/**
+ * Created by sunfusheng on 2016/3/20.
+ */
+public interface RetrofitApi {
+
+    // 获得图灵API接口URL
+    @GET("api")
+    Call<MessageEntity> getTulingInfo(@Query("key") String key, @Query("info") String info);
 
 }
