@@ -7,7 +7,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId 'com.sunfusheng.tuling'
+        applicationId 'com.robot.tuling'
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 2

@@ -2,9 +2,9 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -78,7 +78,16 @@ public class MainActivity extends BaseActivity {
 
     private void initListener() {
         ivSendMsg.setOnClickListener((v) -> sendMessage());
-        lvMessage.setOnTouchListener((v, event) -> KeyBoardUtil.hideKeyboard(mActivity));
+        lvMessage.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                KeyBoardUtil.hideKeyboard(mActivity);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
     }
 
     @Override

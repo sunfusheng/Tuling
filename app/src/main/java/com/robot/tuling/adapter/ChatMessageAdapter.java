@@ -77,7 +77,7 @@ public class ChatMessageAdapter extends BaseListAdapter<MessageEntity> {
     // 十分钟内的请求与回复不显示时间
     public boolean isShowTime(int position) {
         if (position > 0) {
-            if ((getItem(position).getTime() - getItem(position - 1).getTime() > 60000)) {
+            if ((getItem(position).getTime() - getItem(position - 1).getTime() > 600000)) {
                 return true;
             } else {
                 return false;
