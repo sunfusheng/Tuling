@@ -33,6 +33,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.0.0-SNAPSHOT'
     apt 'com.jakewharton:butterknife-compiler:8.0.0-SNAPSHOT'
 
+    compile 'com.orhanobut:logger:1.4'
+
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
@@ -47,7 +49,6 @@ dependencies {
     apt 'de.devland.esperandro:esperandro:2.1.0'
     compile 'de.devland.esperandro:esperandro-api:2.1.0'
 
-    compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
 
     compile 'com.squareup.retrofit2:retrofit:2.0.0'

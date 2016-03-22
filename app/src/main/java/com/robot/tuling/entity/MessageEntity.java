@@ -1,6 +1,7 @@
 package com.robot.tuling.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MessageEntity implements Serializable {
 
@@ -9,6 +10,15 @@ public class MessageEntity implements Serializable {
     private int code;
     private String text;
     private String url;
+    private List<NewsEntity> list;
+
+    public List<NewsEntity> getList() {
+        return list;
+    }
+
+    public void setList(List<NewsEntity> list) {
+        this.list = list;
+    }
 
     public long getTime() {
         return time;
@@ -58,6 +68,7 @@ public class MessageEntity implements Serializable {
                 ", code=" + code +
                 ", text='" + text + '\'' +
                 ", url='" + url + '\'' +
+                ", list=" + list +
                 '}';
     }
 }

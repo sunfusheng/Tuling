@@ -20,11 +20,16 @@ public class TimeUtil {
     public static final String DATE_FORMAT_PASS_TADAY = "MM月dd日HH:mm";
     public static final String DOUBLE_FORMAT_TWO_POINT = "#0.00";
 
-    /**
-     * @param date   單位爲毫秒
-     * @param format
-     * @return
-     */
+    // 获得当前时间的秒数
+    public static long getCurrentSeconds() {
+        return Calendar.getInstance().getTimeInMillis() / 1000;
+    }
+
+    // 获得当前时间的毫秒数
+    public static long getCurrentMillis() {
+        return Calendar.getInstance().getTimeInMillis();
+    }
+
     public static String convertLongToString(long date, String format) {
         SimpleDateFormat sf = new SimpleDateFormat(format);
         return sf.format(new Date(date));
@@ -173,9 +178,10 @@ public class TimeUtil {
         return result;
     }
 
-    public static String friendlyTime(Context ctx, long sdate) {
+    // millis为毫秒
+    public static String friendlyTime(Context ctx, long millis) {
         SimpleDateFormat formatter = new SimpleDateFormat(TIME_FORMAT);
-        Date currDate = new Date(sdate);
+        Date currDate = new Date(millis);
         String str = formatter.format(currDate);
 
         Date time = toDate(str);
@@ -222,10 +228,7 @@ public class TimeUtil {
         } else if (days == 2) {
             ftime = ctx.getString(R.string.the_day_before_yestoday);
         } else if (days > 2) {
-            ftime = convertDateToString(sdate);
-//            SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-//            cal.setTimeInMillis(sdate);
-//            ftime = format.format(new Date(cal.getTimeInMillis()));
+            ftime = convertDateToString(millis);
         }
         return ftime;
     }
@@ -260,25 +263,6 @@ public class TimeUtil {
             return df.format(startDate) + "-" + df.format(endDate);
         } catch (Exception e) {
             return "";
-        }
-    }
-
-
-    public static String getNameWithGender(String name, String gender) {
-        if (name != null) {
-            if (name.length() > 1) {
-                return name;
-            } else {
-                if ("M".equals(gender)) {
-                    return name + "先生";
-                } else if ("F".equals(gender)) {
-                    return name + "女士";
-                } else {
-                    return name;
-                }
-            }
-        } else {
-            return name;
         }
     }
 

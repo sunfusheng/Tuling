@@ -34,7 +34,7 @@
             android:singleLine="true"
             android:layout_marginTop="3dp"
             android:textSize="12dp"
-            android:textColor="@color/font_black_3"
+            android:textColor="@color/font_black_4"
             android:text="内容"/>
 
     </LinearLayout>

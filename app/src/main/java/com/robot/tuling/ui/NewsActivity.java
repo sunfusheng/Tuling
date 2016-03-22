@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import com.robot.tuling.R;
 import com.robot.tuling.adapter.NewsAdapter;
 import com.robot.tuling.control.NavigateManager;
+import com.robot.tuling.entity.MessageEntity;
 import com.robot.tuling.entity.NewsEntity;
 import com.robot.tuling.util.DisplayUtil;
 import com.robot.tuling.widget.refreshswipemenulistview.XListView;
@@ -54,7 +55,12 @@ public class NewsActivity extends BaseActivity implements XListView.IXListViewLi
     }
 
     private void initData() {
-//        newsList = NewsEntity.listAll(NewsEntity.class);
+        MessageEntity messageEntity = (MessageEntity) getIntent().getSerializableExtra("messageEntity");
+        if (messageEntity != null && messageEntity.getList() != null && messageEntity.getList().size() > 0) {
+            newsList = messageEntity.getList();
+        } else {
+            finish();
+        }
     }
 
     private void initView() {

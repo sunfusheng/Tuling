@@ -21,3 +21,11 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
+
+allprojects.each { p ->
+    p.buildDir "bin"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -7,7 +7,7 @@
     <include layout="@layout/app_base_toolbar" />
 
     <WebView
-        android:id="@+id/wv_weibo"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

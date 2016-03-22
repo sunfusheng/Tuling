@@ -48,7 +48,7 @@
                 android:id="@+id/btv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autoLink="phone|web|email"
+                android:autoLink="phone|email"
                 android:padding="10dp"
                 android:text="你好！"
                 android:textColor="@android:color/white"

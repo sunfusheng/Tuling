@@ -136,17 +136,29 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onResponse(Call<MessageEntity> call, Response<MessageEntity> response) {
                 if (response == null) return ;
-                if (response.body() != null) {
-                    msgList.add(response.body());
-                    msgAdapter.notifyDataSetChanged();
-                }
+                handleResponseMessageInfo(response.body());
             }
 
             @Override
-            public void onFailure(Call<MessageEntity> call, Throwable t) {
-            }
+            public void onFailure(Call<MessageEntity> call, Throwable t) {}
         });
 
+    }
+
+    private void handleResponseMessageInfo(MessageEntity entity) {
+        if (entity == null) return;
+        entity.setTime(TimeUtil.getCurrentTimeMillis());
+        entity.setType(ChatMessageAdapter.TYPE_LEFT);
+        switch (entity.getCode()) {
+            case TulingParams.TulingCode.URL:
+                entity.setText(entity.getText() + "，点击网址查看：" + entity.getUrl());
+                break;
+            case TulingParams.TulingCode.NEWS:
+                entity.setText(entity.getText() + "，点击查看");
+                break;
+        }
+        msgList.add(entity);
+        msgAdapter.notifyDataSetChanged();
     }
 
 }

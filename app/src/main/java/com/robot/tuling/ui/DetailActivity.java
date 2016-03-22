@@ -1,15 +1,18 @@
 package com.robot.tuling.ui;
 
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.robot.tuling.R;
-import com.robot.tuling.util.IsNullOrEmpty;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,9 +24,12 @@ public class DetailActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.wv_weibo)
-    WebView wvWeibo;
-    private String URL = "";
+    @Bind(R.id.webView)
+    WebView webView;
+
+
+    private String mUrl = "";
+    private WebSettings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class DetailActivity extends BaseActivity {
 
         initActionBar();
         initData();
+        initView();
     }
 
     private void initActionBar() {
@@ -41,37 +48,81 @@ public class DetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
     private void initData() {
-        if (getIntent() != null && getIntent().hasExtra("url")) {
-            URL = getIntent().getStringExtra("url");
-            if (IsNullOrEmpty.isEmpty(URL)) {
-                Toast.makeText(this, "暂无新闻内容", Toast.LENGTH_SHORT).show();
-                return;
+        mUrl = getIntent().getStringExtra("url");
+    }
+
+    private void initView() {
+        settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true); //如果访问的页面中有Javascript，则WebView必须设置支持Javascript
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setSupportZoom(true); //支持缩放
+        settings.setBuiltInZoomControls(true); //支持手势缩放
+        settings.setDisplayZoomControls(false); //是否显示缩放按钮
+
+        // >= 19(SDK4.4)启动硬件加速，否则启动软件加速
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            settings.setLoadsImagesAutomatically(true); //支持自动加载图片
+        } else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            settings.setLoadsImagesAutomatically(false);
+        }
+
+        settings.setUseWideViewPort(true); //将图片调整到适合WebView的大小
+        settings.setLoadWithOverviewMode(true); //自适应屏幕
+        settings.setDomStorageEnabled(true);
+        settings.setAppCacheEnabled(true);
+        settings.setSaveFormData(true);
+        settings.setSupportMultipleWindows(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //优先使用缓存
+
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY); //可使滚动条不占位
+        webView.setHorizontalScrollbarOverlay(true);
+        webView.setHorizontalScrollBarEnabled(true);
+        webView.requestFocus();
+
+        webView.loadUrl(mUrl);
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
             }
-        }
-        WebSettings webSettings = wvWeibo.getSettings();
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setAllowFileAccess(true);
-        wvWeibo.loadUrl(URL);
-        wvWeibo.setWebViewClient(new webViewClient());
-    }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && wvWeibo.canGoBack()) {
-            wvWeibo.goBack();
-            return true;
-        }
-        finish();
-        return false;
-    }
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                toolbar.setTitle("正在加载...");
+            }
 
-    private class webViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                webView.setLayerType(View.LAYER_TYPE_NONE, null);
+                if (!settings.getLoadsImagesAutomatically()) {
+                    settings.setLoadsImagesAutomatically(true);
+                }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                toolbar.setTitle("加载失败");
+            }
+        });
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                toolbar.setTitle(title);
+            }
+        });
+
     }
 
 }
+

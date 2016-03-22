@@ -39,7 +39,7 @@ public class NewsAdapter extends BaseListAdapter<NewsEntity> {
         if (!IsNullOrEmpty.isEmpty(entity.getIcon())) {
         }
         holder.tvNewsTitle.setText(entity.getArticle() + "");
-        holder.tvNewsContent.setText(entity.getSource() + "");
+        holder.tvNewsContent.setText("来自" + entity.getSource());
 
         return convertView;
     }
