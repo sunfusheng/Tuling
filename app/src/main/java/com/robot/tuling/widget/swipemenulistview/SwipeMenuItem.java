@@ -3,6 +3,7 @@ package com.robot.tuling.widget.swipemenulistview;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 /**
  * 
@@ -70,7 +71,11 @@ public class SwipeMenuItem {
 	}
 
 	public void setIcon(int resId) {
-		this.icon = mContext.getResources().getDrawable(resId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.icon = mContext.getDrawable(resId);
+        } else {
+            this.icon = mContext.getResources().getDrawable(resId);
+        }
 	}
 
 	public Drawable getBackground() {
@@ -82,8 +87,12 @@ public class SwipeMenuItem {
 	}
 
 	public void setBackground(int resId) {
-		this.background = mContext.getResources().getDrawable(resId);
-	}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.background = mContext.getDrawable(resId);
+        } else {
+            this.background = mContext.getResources().getDrawable(resId);
+        }
+    }
 
 	public int getWidth() {
 		return width;

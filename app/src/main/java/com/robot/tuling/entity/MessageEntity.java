@@ -12,6 +12,21 @@ public class MessageEntity implements Serializable {
     private String url;
     private List<NewsEntity> list;
 
+    public MessageEntity() {
+    }
+
+    public MessageEntity(int type, long time) {
+        this.type = type;
+        this.time = time;
+        this.text = text;
+    }
+
+    public MessageEntity(int type, long time, String text) {
+        this.type = type;
+        this.time = time;
+        this.text = text;
+    }
+
     public List<NewsEntity> getList() {
         return list;
     }
