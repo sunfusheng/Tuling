@@ -2,6 +2,7 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.orhanobut.logger.Logger;
 import com.robot.tuling.R;
 import com.robot.tuling.adapter.ChatMessageAdapter;
 import com.robot.tuling.constant.TulingParams;
@@ -217,7 +217,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onNext(String s) {
-                Logger.d("onNext(): ", s);
+                Log.d("onNext: ", s);
             }
         };
 
@@ -226,9 +226,9 @@ public class MainActivity extends BaseActivity {
                 .subscribe(subscriber1);
 
         // 将上面分解成三步执行
-        // Observable<Integer> observable = Observable.create(onSubscribe1);
-        // Observable<String> map = observable.map(func1);
-        // map.subscribe(subscriber1);
+        // Observable<Integer> observable1 = Observable.create(onSubscribe1);
+        // Observable<String> observable2 = observable1.map(func1);
+        // observable2.subscribe(subscriber1);
     }
 
     // 处理获得到的问答信息
