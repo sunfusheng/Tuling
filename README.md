@@ -4,15 +4,15 @@
 
 主要为了学习下面的技术：
 
-[RetroLambda](https://github.com/evant/gradle-retrolambda)
-[RxAndroid](https://github.com/ReactiveX/RxAndroid)
-[Retrofit](https://github.com/square/retrofit)
+* [RetroLambda](https://github.com/evant/gradle-retrolambda)
+* [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+* [Retrofit](https://github.com/square/retrofit)
 
 ### ScreenShots
 
 ![](/screenshots/turing_1.png)
 
-[下载地址](http://fir.im/turing)
+### [下载地址](http://fir.im/turing)
 
 
 ### 关于我
