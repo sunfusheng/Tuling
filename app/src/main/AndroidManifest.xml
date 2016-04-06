@@ -29,6 +29,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5704835b67e58ea608001000"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${umengHolder}"/>
+
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"

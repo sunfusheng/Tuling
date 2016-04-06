@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onNext(MessageEntity entity) {
-
+                        handleResponseMessage(entity);
                     }
                 });
     }

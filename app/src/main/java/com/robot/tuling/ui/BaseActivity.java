@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.umeng.analytics.MobclickAgent;
+
 import de.devland.esperandro.Esperandro;
 
 public class BaseActivity extends AppCompatActivity {
@@ -19,6 +21,20 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         mActivity = this;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("SplashScreen");
+        MobclickAgent.onResume(this); //友盟统计
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("SplashScreen");
+        MobclickAgent.onPause(this); //友盟统计
     }
 
     public <P> P getSharedPreferences(Class<P> spClass) {
