@@ -10,14 +10,14 @@
 
 ### ScreenShots
 
-![](/screenshots/turing_1.png)
+![](/screenshots/图灵机器人.gif)
 
 ### [下载地址](http://fir.im/turing)
 
 
 ### 关于我
 
-邮箱：sfsheng0322@126.com
+个人邮箱：sfsheng0322@126.com
 
 [GitHub主页](https://github.com/sfsheng0322)
 
@@ -25,4 +25,4 @@
 
 [个人博客](http://sunfusheng.com/)
 
-[新浪微博](http://weibo.com/3852192525/profile?rightmod=1&wvr=6&mod=personinfo)
+[新浪微博](http://weibo.com/u/3852192525)
