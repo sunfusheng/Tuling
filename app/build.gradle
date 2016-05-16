@@ -86,8 +86,7 @@ def generateAppName(variant) {
 dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.jakewharton:butterknife:8.0.0-SNAPSHOT'
-    apt 'com.jakewharton:butterknife-compiler:8.0.0-SNAPSHOT'
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.orhanobut:logger:1.4'
 
