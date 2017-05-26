@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.ant.liao.GifView;
 import com.robot.tuling.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -16,13 +16,13 @@ import butterknife.ButterKnife;
  */
 public class AboutActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.gv_about)
+    @BindView(R.id.gv_about)
     GifView gvAbout;
-    @Bind(R.id.lr_title)
+    @BindView(R.id.lr_title)
     TextView lrTitle;
-    @Bind(R.id.tv_version_right)
+    @BindView(R.id.tv_version_right)
     LinearLayout tvVersionRight;
 
     private boolean isShowGifView = true;

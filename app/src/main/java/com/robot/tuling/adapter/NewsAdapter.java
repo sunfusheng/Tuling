@@ -12,7 +12,7 @@ import com.robot.tuling.util.IsNullOrEmpty;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -45,11 +45,11 @@ public class NewsAdapter extends BaseListAdapter<NewsEntity> {
     }
 
     static class ViewHolder {
-        @Bind(R.id.iv_news_icon)
+        @BindView(R.id.iv_news_icon)
         ImageView ivNewsIcon;
-        @Bind(R.id.tv_news_title)
+        @BindView(R.id.tv_news_title)
         TextView tvNewsTitle;
-        @Bind(R.id.tv_news_content)
+        @BindView(R.id.tv_news_content)
         TextView tvNewsContent;
 
         ViewHolder(View view) {

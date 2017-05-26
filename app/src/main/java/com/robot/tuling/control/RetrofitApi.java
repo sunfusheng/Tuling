@@ -2,10 +2,10 @@ package com.robot.tuling.control;
 
 import com.robot.tuling.entity.MessageEntity;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by sunfusheng on 2016/3/20.

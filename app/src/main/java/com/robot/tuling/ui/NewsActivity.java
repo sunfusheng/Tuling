@@ -22,7 +22,7 @@ import com.robot.tuling.widget.swipemenulistview.SwipeMenuListView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -30,10 +30,11 @@ import butterknife.ButterKnife;
  */
 public class NewsActivity extends BaseActivity implements XListView.IXListViewListener {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.xlv_listView)
+    @BindView(R.id.xlv_listView)
     XListView xlvListView;
+
     private List<NewsEntity> newsList;
     private NewsAdapter newsAdapter;
 

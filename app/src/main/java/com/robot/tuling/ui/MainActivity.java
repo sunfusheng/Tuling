@@ -2,7 +2,6 @@ package com.robot.tuling.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
@@ -24,31 +23,28 @@ import com.robot.tuling.util.TimeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.lv_message)
+    @BindView(R.id.lv_message)
     ListView lvMessage;
-    @Bind(R.id.iv_send_msg)
+    @BindView(R.id.iv_send_msg)
     ImageView ivSendMsg;
-    @Bind(R.id.et_msg)
+    @BindView(R.id.et_msg)
     EditText etMsg;
-    @Bind(R.id.rl_msg)
+    @BindView(R.id.rl_msg)
     RelativeLayout rlMsg;
 
     private List<MessageEntity> msgList = new ArrayList<>();
@@ -162,7 +158,7 @@ public class MainActivity extends BaseActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(TulingParams.TULING_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         RetrofitApi api = retrofit.create(RetrofitApi.class);
@@ -170,65 +166,7 @@ public class MainActivity extends BaseActivity {
         api.getTuringInfoByRxJava(TulingParams.TULING_KEY, info)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MessageEntity>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(MessageEntity entity) {
-                        handleResponseMessage(entity);
-                    }
-                });
-    }
-
-    // 通过RxJava将Integer类型转成String类型
-    private void funcDemo() {
-        Observable.OnSubscribe<Integer> onSubscribe1 = new Observable.OnSubscribe<Integer>() {
-            @Override
-            public void call(Subscriber<? super Integer> subscriber) {
-                subscriber.onNext(100);
-            }
-        };
-
-        Func1<Integer, String> func1 = new Func1<Integer, String>() {
-            @Override
-            public String call(Integer integer) {
-                return String.valueOf(integer);
-            }
-        };
-
-        Subscriber<String> subscriber1 = new Subscriber<String>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-                Log.d("onNext: ", s);
-            }
-        };
-
-        Observable.create(onSubscribe1)
-                .map(func1)
-                .subscribe(subscriber1);
-
-        // 将上面分解成三步执行
-        // Observable<Integer> observable1 = Observable.create(onSubscribe1);
-        // Observable<String> observable2 = observable1.map(func1);
-        // observable2.subscribe(subscriber1);
+                .subscribe(this::handleResponseMessage, Throwable::printStackTrace);
     }
 
     // 处理获得到的问答信息

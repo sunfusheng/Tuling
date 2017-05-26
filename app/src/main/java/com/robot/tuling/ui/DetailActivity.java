@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.robot.tuling.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
  */
 public class DetailActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
 
 
