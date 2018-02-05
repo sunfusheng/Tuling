@@ -1,19 +1,18 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
-Properties prop = new Properties()
-prop.load(new FileInputStream(file("signing.properties")))
+Properties signingProperties = new Properties()
+signingProperties.load(new FileInputStream(file("../signings/signing.properties")))
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId 'com.robot.tuling'
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 3
-        versionName '1.3'
+        versionName '1.4'
         manifestPlaceholders = [umengHolder: "Tuling"]
     }
 
@@ -24,85 +23,88 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(prop['KEYSTORE_FILEPATH'])
-            storePassword prop['STORE_PASSWORD']
-            keyAlias prop['KEY_ALIAS']
-            keyPassword prop['KEY_PASSWORD']
+            storeFile file(signingProperties['KEYSTORE_FILEPATH'])
+            storePassword signingProperties['STORE_PASSWORD']
+            keyAlias signingProperties['KEY_ALIAS']
+            keyPassword signingProperties['KEY_PASSWORD']
         }
     }
 
     buildTypes {
         release {
-            //压缩资源
-            shrinkResources true
-            //zip优化
-            zipAlignEnabled true
-            //apk签名
+            buildConfigField "boolean", "debugMode", "false"
             signingConfig signingConfigs.release
-            //release版
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
-                variant -> generateAppName(variant)
+                variant -> generateApk(variant)
             }
         }
 
-        debug{
-            //压缩资源
-            shrinkResources false
-            //zip优化
-            zipAlignEnabled false
-            //apk签名
+        debug {
+            buildConfigField "boolean", "debugMode", "true"
             signingConfig signingConfigs.release
-            //debug版
-            buildConfigField "boolean", "LOG_DEBUG", "false"
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all {
-                variant -> generateAppName(variant)
+                variant -> generateApk(variant)
             }
         }
     }
 
+    flavorDimensions "type"
+
     productFlavors {
-        fir {manifestPlaceholders = [umengHolder: "fir"]}
-        xiaomi {manifestPlaceholders = [umengHolder: "xiaomi"]}
-        "360" {manifestPlaceholders = [umengHolder: "360"]}
-        baidu {manifestPlaceholders = [umengHolder: "baidu"]}
+        fir {
+            manifestPlaceholders = [umengHolder: "fir"]
+            dimension "type"
+        }
+        xiaomi {
+            manifestPlaceholders = [umengHolder: "xiaomi"]
+            dimension "type"
+        }
+        "360" {
+            manifestPlaceholders = [umengHolder: "360"]
+            dimension "type"
+        }
+        baidu {
+            manifestPlaceholders = [umengHolder: "baidu"]
+            dimension "type"
+        }
     }
 }
 
-//生成自定义App名称
-def generateAppName(variant) {
-    variant.outputs.each {
-        output -> output.outputFile = new File (output.outputFile.parent,
-                "Tuling_${variant.buildType.name}_${variant.versionName}_${variant.productFlavors[0].name}.apk".toLowerCase())
+def generateApk(variant) {
+    if (variant.buildType.name == "release") {
+        variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/outputs")
+        variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
+            apkData.outputFileName = "Tuling_${variant.buildType.name}_${variant.versionName}_${variant.productFlavors[0].name}.apk"
+        }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.android.support:support-v4:27.0.2'
+    implementation 'com.android.support:support-v13:27.0.2'
 
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.orhanobut:logger:1.15'
-    compile 'com.afollestad.material-dialogs:core:0.9.4.4'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.orhanobut:logger:2.1.1'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.4'
 
-    compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.lguipeng.bubbleview:library:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.lguipeng.bubbleview:library:1.0.0'
 
-    compile 'de.devland.esperandro:esperandro-api:2.1.0'
-    annotationProcessor 'de.devland.esperandro:esperandro:2.1.0'
+    implementation 'de.devland.esperandro:esperandro-api:2.2.0'
+    annotationProcessor 'de.devland.esperandro:esperandro:2.2.0'
 
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'com.google.code.gson:gson:2.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
 
-    compile 'com.umeng.analytics:analytics:latest.integration'
+    implementation 'com.umeng.analytics:analytics:6.1.0'
 }
