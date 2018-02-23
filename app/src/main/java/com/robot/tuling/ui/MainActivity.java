@@ -19,6 +19,7 @@ import com.robot.tuling.entity.MessageEntity;
 import com.robot.tuling.util.IsNullOrEmpty;
 import com.robot.tuling.util.KeyBoardUtil;
 import com.robot.tuling.util.TimeUtil;
+import com.sunfusheng.FirUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        new FirUpdater(this, "3c57fb226edf7facf821501e4eba08d2", "5704953c00fc74127000000a").checkVersion();
 
         initData();
         initView();

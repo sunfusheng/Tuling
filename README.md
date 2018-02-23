@@ -4,7 +4,7 @@
 
 <br/>
 
-### ScreenShots
+### 效果图
 
 ![](/resources/res.gif)
 

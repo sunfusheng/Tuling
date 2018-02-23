@@ -11,8 +11,8 @@ android {
         applicationId 'com.robot.tuling'
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 3
-        versionName '1.4'
+        versionCode 4
+        versionName '1.5.0'
         manifestPlaceholders = [umengHolder: "Tuling"]
     }
 
@@ -107,4 +107,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
 
     implementation 'com.umeng.analytics:analytics:6.1.0'
+    implementation 'com.sunfusheng:FirUpdater:1.0.7'
 }
